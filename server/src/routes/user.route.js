@@ -48,7 +48,25 @@ router.post(
   userController.signin
 );
 
-
+router.put(
+  "/update-password",
+  tokenMiddleware.auth,
+  body("password")
+    .exists().withMessage("password is required")
+    .isLength({ min: 8 }).withMessage("password minimum 8 characters"),
+  body("newPassword")
+    .exists().withMessage("newPassword is required")
+    .isLength({ min: 8 }).withMessage("newPassword minimum 8 characters"),
+  body("confirmNewPassword")
+    .exists().withMessage("confirmNewPassword is required")
+    .isLength({ min: 8 }).withMessage("confirmNewPassword minimum 8 characters")
+    .custom((value, { req }) => {
+      if (value !== req.body.newPassword) throw new Error("confirmNewPassword not match");
+      return true;
+    }),
+  requestHandler.validate,
+  userController.updatePassword
+);
 
 router.get(
   "/info",
