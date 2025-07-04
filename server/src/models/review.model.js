@@ -5,7 +5,7 @@ export default mongoose.model(
   "Review",
   mongoose.Schema({
     user: {
-      type: Schema.Types.ObjectId,
+      type: String,
       ref: "User",
       required: true
     },
