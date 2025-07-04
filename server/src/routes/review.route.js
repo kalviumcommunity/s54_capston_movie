@@ -12,7 +12,6 @@ router.get(
   reviewController.getReviewsOfUser
 );
 
-
 router.post(
   "/",
   tokenMiddleware.auth,
@@ -32,6 +31,7 @@ router.post(
   requestHandler.validate,
   reviewController.create
 );
+
 
 router.delete(
   "/:reviewId",
