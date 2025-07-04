@@ -42,6 +42,7 @@ const remove = async (req, res) => {
   }
 };
 
+
 const getReviewsOfUser = async (req, res) => {
   try {
     const reviews = await reviewModel.find({
@@ -54,4 +55,8 @@ const getReviewsOfUser = async (req, res) => {
   }
 };
 
+
 export default { create, remove, getReviewsOfUser };
+
+
+

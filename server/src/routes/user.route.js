@@ -8,6 +8,7 @@ import tokenMiddleware from "../middlewares/token.middleware.js";
 
 const router = express.Router();
 
+
 router.post(
   "/signup",
   body("username")
@@ -48,6 +49,7 @@ router.post(
 
 
 
+
 router.get(
   "/info",
   tokenMiddleware.auth,
@@ -78,6 +80,7 @@ router.post(
   requestHandler.validate,
   favoriteController.addFavorite
 );
+
 
 
 export default router;

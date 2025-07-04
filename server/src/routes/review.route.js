@@ -12,6 +12,7 @@ router.get(
   reviewController.getReviewsOfUser
 );
 
+
 router.post(
   "/",
   tokenMiddleware.auth,
@@ -37,5 +38,7 @@ router.delete(
   tokenMiddleware.auth,
   reviewController.remove
 );
+
+
 
 export default router;
