@@ -5,7 +5,7 @@ export default mongoose.model(
   "Favorite",
   mongoose.Schema({
     user: {
-      type: String,
+      type: Schema.Types.ObjectId,
       ref: "User",
       required: true
     },
