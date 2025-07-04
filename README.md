@@ -23,10 +23,10 @@ In the second terminal
 #  --- .env  ---
 
 MONGODB_URL
-PORT =5000
-TOKEN_SECRET=
-TMDB_BASE_URL=
-TMDB_KEY=
+PORT = 7878
+TOKEN_SECRET
+TMDB_BASE_URL
+TMDB_KEY
 
 
 # --- Terminal ---
@@ -90,3 +90,7 @@ This project was created using the following technologies.
 ####  Api 
 
  - [TMDB API](https://developer.themoviedb.org/docs) - An application programming interface that provides access to a database of movies, television shows, and related information from The Movie Database platform.
+
+
+ # Backend (Server) Deployed link : [Link](https://s54-capston-movie.onrender.com/ping)
+ 
