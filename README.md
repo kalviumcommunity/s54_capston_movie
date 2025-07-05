@@ -93,6 +93,6 @@ This project was created using the following technologies.
 
 
  # Backend (Server) Deployed link : [Backend_Link](https://s54-capston-movie.onrender.com/ping)
- # Frontend (React-app) Deployed link : https://check-once-457o-mrx1i5wht-ricky-kumars-projects-7c278333.vercel.app/
+ # Frontend (React-app) Deployed link : https://check-once-457o.vercel.app/
 
  
