@@ -93,6 +93,6 @@ This project was created using the following technologies.
 
 
  # Backend (Server) Deployed link : [Backend_Link](https://s54-capston-movie.onrender.com/ping)
- # Frontend (React-app) Deployed link : [Front-end_Link](https://magnificent-cupcake-f81696.netlify.app/)
+ # Frontend (React-app) Deployed link : (https://check-once-git-main-rickys-projects-0e87fe7c.vercel.app/)
 
  
