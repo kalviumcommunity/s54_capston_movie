@@ -1,3 +1,3 @@
-# BertFlix (MERN-MOVIE)
+# Movie-flex 
 
 Fronted (Client)
