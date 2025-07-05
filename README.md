@@ -92,5 +92,7 @@ This project was created using the following technologies.
  - [TMDB API](https://developer.themoviedb.org/docs) - An application programming interface that provides access to a database of movies, television shows, and related information from The Movie Database platform.
 
 
- # Backend (Server) Deployed link : [Link](https://s54-capston-movie.onrender.com/ping)
+ # Backend (Server) Deployed link : [Backend_Link](https://s54-capston-movie.onrender.com/ping)
+ # Frontend (React-app) Deployed link : [Front-end_Link](https://magnificent-cupcake-f81696.netlify.app/)
+
  
