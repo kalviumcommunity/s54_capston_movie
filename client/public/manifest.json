@@ -1,19 +1,19 @@
 {
-  "short_name": "BertFlix",
-  "name": "BertFlix",
+  "short_name": "Movie-flex",
+  "name": "Movie-flex",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "R.jpg",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "R.jpg",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "logo512.png",
+      "src": "R.jpg",
       "type": "image/png",
       "sizes": "512x512"
     }
