@@ -7,12 +7,18 @@ import { routesGen } from "../../routes/routes";
 
 const CastSlide = ({ casts }) => {
   return (
-    <Box sx={{
-      "& .swiper-slide": {
-        width: { xs: "50%", md: "25%", lg: "20.5%" },
-        color: "primary.contrastText"
-      }
-    }}>
+    <Box
+      sx={{
+        "& .swiper-slide": {
+          width: { xs: "50%", sm: "33.33%", md: "25%", lg: "20.5%" },
+          color: "primary.contrastText",
+          transition: "transform 0.3s ease-in-out"
+        },
+        "& .swiper-slide:hover": {
+          transform: "scale(1.03)"
+        }
+      }}
+    >
       <Swiper
         spaceBetween={10}
         slidesPerView={"auto"}
@@ -22,20 +28,34 @@ const CastSlide = ({ casts }) => {
         {casts.map((cast, index) => (
           <SwiperSlide key={index}>
             <Link to={routesGen.person(cast.id)}>
-              <Box sx={{
-                paddingTop: "120%",
-                color: "text.primary",
-                ...uiConfigs.style.backgroundImage(tmdbConfigs.posterPath(cast.profile_path))
-              }}>
-                <Box sx={{
-                  position: "absolute",
-                  width: "100%",
-                  height: "max-content",
-                  bottom: 0,
-                  padding: "10px",
-                  backgroundColor: "rgba(0,0,0,0.6)"
-                }}>
-                  <Typography sx={{...uiConfigs.style.typoLines(1, "left")}}>
+              <Box
+                sx={{
+                  position: "relative",
+                  borderRadius: 2,
+                  overflow: "hidden",
+                  paddingTop: "120%",
+                  color: "text.primary",
+                  ...uiConfigs.style.backgroundImage(tmdbConfigs.posterPath(cast.profile_path)),
+                  transition: "transform 0.3s ease"
+                }}
+              >
+                <Box
+                  sx={{
+                    position: "absolute",
+                    width: "100%",
+                    bottom: 0,
+                    padding: "10px",
+                    background: "linear-gradient(to top, rgba(0,0,0,0.7), transparent)",
+                    color: "white"
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      ...uiConfigs.style.typoLines(1, "left"),
+                      fontSize: "0.9rem",
+                      fontWeight: 600
+                    }}
+                  >
                     {cast.name}
                   </Typography>
                 </Box>

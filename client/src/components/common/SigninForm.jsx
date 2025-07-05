@@ -81,7 +81,7 @@ const SigninForm = ({ switchAuthState }) => {
         sx={{ marginTop: 4 }}
         loading={isLoginRequest}
       >
-        sign in
+        log-in
       </LoadingButton>
 
       <Button

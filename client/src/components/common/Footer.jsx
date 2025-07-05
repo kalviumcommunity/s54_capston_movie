@@ -1,58 +1,125 @@
-import { Paper, Stack, Button, Box, Typography, useTheme } from '@mui/material';
+import {
+  Paper,
+  Stack,
+  Box,
+  Typography,
+  useTheme,
+  IconButton,
+  Tooltip
+} from '@mui/material';
+import { GitHub, LinkedIn, Instagram, KeyboardArrowUp } from '@mui/icons-material';
 import React from 'react';
 import Container from './Container';
 import Logo from './Logo';
-import menuConfigs from "../../configs/menu.configs";
-import { Link } from "react-router-dom";
 
 const Footer = () => {
   const theme = useTheme();
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <Container>
-      <Paper square={true} sx={{ backgroundImage: "unset", padding: "2rem", position: 'relative' }}>
+      <Paper
+        square
+        elevation={0}
+        sx={{
+          backgroundImage: 'unset',
+          padding: '2rem 1rem',
+          borderTop: `1px solid ${theme.palette.divider}`,
+          backgroundColor: theme.palette.background.paper,
+        }}
+      >
+        {/* Top Section: Logo + Social */}
         <Stack
+          direction={{ xs: 'column', md: 'row' }}
           alignItems="center"
           justifyContent="space-between"
-          direction={{ xs: "column", md: "row " }}
-          sx={{ height: "max-content" }}
+          spacing={3}
         >
-          <Logo />
-          <Box>
-            {menuConfigs.main.map((item, index) => (
-              <Button
-                key={index}
-                sx={{ color: "inherit" }}
-                component={Link}
-                to={item.path}
-              >
-                {item.display}
-              </Button>
-            ))}
+          {/* Logo and Tagline */}
+          <Box textAlign={{ xs: 'center', md: 'left' }}>
+            <Logo />
+            <Typography variant="body2" sx={{ color: 'text.secondary', mt: 1 }}>
+              Discover. Watch. Enjoy.
+            </Typography>
           </Box>
+
+          {/* Social Links */}
+          <Stack direction="row" spacing={2} justifyContent="center">
+            <Tooltip title="GitHub">
+              <IconButton
+                component="a"
+                href="https://github.com/Rickykumar010"
+                target="_blank"
+                rel="noopener noreferrer"
+                sx={{ color: theme.palette.text.secondary }}
+              >
+                <GitHub />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="LinkedIn">
+              <IconButton
+                component="a"
+                href="https://www.linkedin.com/in/rickykumar010"
+                target="_blank"
+                rel="noopener noreferrer"
+                sx={{ color: theme.palette.text.secondary }}
+              >
+                <LinkedIn />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Instagram">
+              <IconButton
+                component="a"
+                href="https://www.instagram.com/rickyshaw07/?hl=en"
+                target="_blank"
+                rel="noopener noreferrer"
+                sx={{ color: theme.palette.text.secondary }}
+              >
+                <Instagram />
+              </IconButton>
+            </Tooltip>
+          </Stack>
+
+          {/* Contact / Top Button */}
+          <Stack direction="row" spacing={2} alignItems="center">
+            <Typography
+              variant="body2"
+              sx={{ color: 'text.secondary', display: { xs: 'none', md: 'block' } }}
+            >
+              📩 rickykumar26400@gmail.com
+            </Typography>
+            <Tooltip title="Back to Top">
+              <IconButton onClick={scrollToTop} sx={{ color: theme.palette.primary.main }}>
+                <KeyboardArrowUp />
+              </IconButton>
+            </Tooltip>
+          </Stack>
         </Stack>
+
+        {/* Bottom Section */}
         <Typography
           variant="body2"
           align="center"
           sx={{
-            position: 'absolute',
-            bottom: '1rem',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            width: '100%',
-            color: 'gray',
+            mt: 4,
+            color: 'text.secondary',
           }}
         >
-          &copy; 2022 BertFlix Developed by{' '}
+          &copy; {new Date().getFullYear()} Movie-Flex. Built by{' '}
           <a
-            style={{
-              textDecoration: 'none',
-              color: theme.palette.primary.main
-            }}
             href="https://berthutapea.vercel.app/"
             target="_blank"
             rel="noopener noreferrer"
+            style={{
+              color: theme.palette.primary.main,
+              textDecoration: 'none',
+              fontWeight: 500,
+            }}
           >
-            Gilbert Hutapea
+            Ricky Kumar
           </a>
         </Typography>
       </Paper>

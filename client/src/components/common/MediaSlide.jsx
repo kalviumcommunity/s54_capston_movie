@@ -26,7 +26,14 @@ const MediaSlide = ({ mediaType, mediaCategory }) => {
   return (
     <AutoSwiper>
       {medias.map((media, index) => (
-        <SwiperSlide key={index}>
+        <SwiperSlide
+          key={index}
+          style={{
+            width: "250px",           // 📏 Increased width
+            maxWidth: "90vw",         // 🛡️ Prevent overflow on small screens
+            marginBottom: "1.5rem"    // 📦 Optional vertical spacing
+          }}
+        >
           <MediaItem media={media} mediaType={mediaType} />
         </SwiperSlide>
       ))}

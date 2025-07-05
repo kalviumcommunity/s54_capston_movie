@@ -3,17 +3,9 @@ import { Swiper } from "swiper/react";
 
 const AutoSwiper = ({ children }) => {
   return (
-    <Box sx={{
-      "& .swiper-slide": {
-        width: {
-          xs: "50%",
-          sm: "35%",
-          md: "25%",
-          lg: "20.5%"
-        }
-      }
-    }}>
+    <Box sx={{ px: { xs: 2, sm: 3 }, py: 2 }}>
       <Swiper
+        spaceBetween={20} // ⬅️ spacing between cards
         slidesPerView="auto"
         grabCursor={true}
         style={{ width: "100%", height: "max-content" }}

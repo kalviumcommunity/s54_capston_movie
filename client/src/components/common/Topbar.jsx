@@ -2,9 +2,18 @@ import { useSelector, useDispatch } from "react-redux";
 import MenuIcon from "@mui/icons-material/Menu";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import WbSunnyOutlinedIcon from "@mui/icons-material/WbSunnyOutlined";
-import { AppBar, Box, Button, IconButton, Stack, Toolbar, useScrollTrigger } from "@mui/material";
+import {
+  AppBar,
+  Box,
+  Button,
+  IconButton,
+  Stack,
+  Toolbar,
+  useScrollTrigger
+} from "@mui/material";
 import { cloneElement, useState } from "react";
 import { Link } from "react-router-dom";
+
 import menuConfigs from "../../configs/menu.configs";
 import { themeModes } from "../../configs/theme.configs";
 import { setAuthModalOpen } from "../../redux/features/authModalSlice";
@@ -24,8 +33,18 @@ const ScrollAppBar = ({ children, window }) => {
 
   return cloneElement(children, {
     sx: {
-      color: trigger ? "text.primary" : themeMode === themeModes.dark ? "primary.contrastText" : "text.primary",
-      backgroundColor: trigger ? "background.paper" : themeMode === themeModes.dark ? "transparent" : "background.paper"
+      transition: "all 0.3s ease",
+      color: trigger
+        ? "text.primary"
+        : themeMode === themeModes.dark
+        ? "primary.contrastText"
+        : "text.primary",
+      backgroundColor: trigger
+        ? "background.paper"
+        : themeMode === themeModes.dark
+        ? "transparent"
+        : "background.paper",
+      boxShadow: trigger ? 3 : 0
     }
   });
 };
@@ -35,76 +54,118 @@ const Topbar = () => {
   const { themeMode } = useSelector((state) => state.themeMode);
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
   const dispatch = useDispatch();
 
-  const onSwithTheme = () => {
-    const theme = themeMode === themeModes.dark ? themeModes.light : themeModes.dark;
-    dispatch(setThemeMode(theme));
+  const handleThemeToggle = () => {
+    const newTheme =
+      themeMode === themeModes.dark ? themeModes.light : themeModes.dark;
+    dispatch(setThemeMode(newTheme));
   };
 
-  const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
+  const handleSidebarToggle = () => setSidebarOpen(!sidebarOpen);
 
   return (
     <>
-      <Sidebar open={sidebarOpen} toggleSidebar={toggleSidebar} />
+      <Sidebar open={sidebarOpen} toggleSidebar={handleSidebarToggle} />
       <ScrollAppBar>
-        <AppBar elevation={0} sx={{ zIndex: 9999 }}>
-          <Toolbar sx={{ alignItems: "center", justifyContent: "space-between" }}>
-            <Stack direction="row" spacing={1} alignItems="center">
+        <AppBar
+          elevation={0}
+          sx={{
+            zIndex: 9999,
+            backdropFilter: "blur(8px)",
+            backgroundColor:
+              themeMode === themeModes.dark
+                ? "rgba(18, 18, 18, 0.6)"
+                : "rgba(255, 255, 255, 0.7)"
+          }}
+        >
+          <Toolbar
+            sx={{
+              px: 2,
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              minHeight: "64px"
+            }}
+          >
+            {/* Left: Logo and Sidebar toggle */}
+            <Box sx={{ display: "flex", alignItems: "center" }}>
               <IconButton
                 color="inherit"
-                sx={{ mr: 2, display: { md: "none" } }}
-                onClick={toggleSidebar}
+                sx={{ display: { md: "none" }, mr: 1 }}
+                onClick={handleSidebarToggle}
               >
                 <MenuIcon />
               </IconButton>
+              <Logo />
+            </Box>
 
-              <Box sx={{ display: { xs: "inline-block", md: "none" } }}>
-                <Logo />
-              </Box>
-            </Stack>
+            {/* Center: All menu items including Home */}
+            <Box
+              sx={{
+                flex: 1,
+                display: { xs: "none", md: "flex" },
+                justifyContent: "center"
+              }}
+            >
+              <Stack direction="row" spacing={2}>
+                {menuConfigs.main.map((item, index) => (
+                  <Button
+                    key={index}
+                    component={Link}
+                    to={item.path}
+                    sx={{
+                      color: appState.includes(item.state)
+                        ? "primary.contrastText"
+                        : "text.primary",
+                      fontWeight: 500,
+                      px: 2,
+                      textTransform: "none",
+                      borderRadius: "20px"
+                    }}
+                    variant={appState.includes(item.state) ? "contained" : "text"}
+                  >
+                    {item.display}
+                  </Button>
+                ))}
+              </Stack>
+            </Box>
 
-            {/* main menu */}
-            <Box flexGrow={1} alignItems="center" display={{ xs: "none", md: "flex" }}>
-              <Box sx={{ marginRight: "30px" }}>
-                <Logo />
-              </Box>
-              {menuConfigs.main.map((item, index) => (
+            {/* Right: Auth + Theme Toggle */}
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                gap: 2
+              }}
+            >
+              {/* Auth */}
+              {!user ? (
                 <Button
-                  key={index}
+                  variant="contained"
                   sx={{
-                    color: appState.includes(item.state) ? "primary.contrastText" : "inherit",
-                    mr: 2
+                    fontWeight: 600,
+                    textTransform: "none",
+                    borderRadius: "20px",
+                    px: 3
                   }}
-                  component={Link}
-                  to={item.path}
-                  variant={appState.includes(item.state) ? "contained" : "text"}
+                  onClick={() => dispatch(setAuthModalOpen(true))}
                 >
-                  {item.display}
+                  Sign In
                 </Button>
-              ))}
-              <IconButton
-                sx={{ color: "inherit" }}
-                onClick={onSwithTheme}
-              >
-                {themeMode === themeModes.dark && <DarkModeOutlinedIcon />}
-                {themeMode === themeModes.light && <WbSunnyOutlinedIcon />}
+              ) : (
+                <UserMenu />
+              )}
+
+              {/* Theme Toggle - now to the right of Login */}
+              <IconButton onClick={handleThemeToggle} sx={{ color: "inherit" }}>
+                {themeMode === themeModes.dark ? (
+                  <DarkModeOutlinedIcon />
+                ) : (
+                  <WbSunnyOutlinedIcon />
+                )}
               </IconButton>
             </Box>
-            {/* main menu */}
-
-            {/* user menu */}
-            <Stack spacing={3} direction="row" alignItems="center">
-              {!user && <Button
-                variant="contained"
-                onClick={() => dispatch(setAuthModalOpen(true))}
-              >
-                sign in
-              </Button>}
-            </Stack>
-            {user && <UserMenu />}
-            {/* user menu */}
           </Toolbar>
         </AppBar>
       </ScrollAppBar>

@@ -1,0 +1,29 @@
+/* src/components/Topbar/Topbar.css */
+body {
+  background: linear-gradient(135deg, #ff0000, #ffd700); /* red to yellow */
+  background-attachment: fixed;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.navbar-button {
+  transition: all 0.3s ease-in-out;
+  font-weight: 500;
+}
+
+.navbar-button:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.theme-toggle-icon {
+  transition: transform 0.3s ease-in-out;
+}
+
+.theme-toggle-icon:hover {
+  transform: rotate(20deg);
+}
+
+.logo {
+  height: 40px;
+  cursor: pointer;
+}
